@@ -5,7 +5,7 @@ import 'package:collection/collection.dart';
 
 import '../l10n/generated/l10n.dart';
 
-enum EducationCardType {
+enum EmotionCardType {
   acceptance(Color(0xFFcadf8b)),
   admiration(Color(0xFF8ac650)),
   amazement(Color(0xFF0099cd)),
@@ -37,10 +37,35 @@ enum EducationCardType {
   love(Color(0xFFc5c82b)),
   remorse(Color(0xFF597bbc)),
   disapproval(Color(0xFF158ec9)),
-  submission(Color(0xFF45b651));
+  submission(Color(0xFF45b651)),
+
+  guilt(Color(0xFFc25f3f)),
+  curiosity(Color(0xFFc88b1a)),
+  despair(Color(0xFF97526e)),
+  unbelief(Color(0xFF009f8f)),
+  envy(Color(0xFF007f72)),
+  cynicism(Color(0xFF476296)),
+  pride(Color(0xFF1071a0)),
+  hope(Color(0xFF379140)),
+
+  delight(Color(0xFFf59272)),
+  sentimentality(Color(0xFFfcc663)),
+  shame(Color(0xFFd094ad)),
+  outrage(Color(0xFFf77b72)),
+  pessimism(Color(0xFFf998a5)),
+  morbidness(Color(0xFF8aa2d0)),
+  dominance(Color(0xFF72bbde)),
+  anxiety(Color(0xFFdcde7f)),
+
+  bittersweetness(Color(0xFF60b7f3)),
+  ambivalence(Color(0xFFc7e67f)),
+  frozenness(Color(0xFFd3e4f4)),
+  confusion(Color(0xFFdaafc6)),
+  ;
 
   final Color color;
-  const EducationCardType(this.color);
+
+  const EmotionCardType(this.color);
 
   static Color get getSerenityOpaqueColor => const Color(0xFFfffbd4);
   static Color get getAcceptanceOpaqueColor => const Color(0xFFd8e8b4);
@@ -53,79 +78,118 @@ enum EducationCardType {
 }
 
 extension EducationCardTypeStringExt on String {
-  EducationCardType? get xEmotionTypes =>
-      EducationCardType.values.firstWhereOrNull((element) => element.xRawValue == this);
+  EmotionCardType? get xEmotionTypes => EmotionCardType.values.firstWhereOrNull((element) => element.xRawValue == this);
 }
 
-extension EducationCardTypeKeysExt on EducationCardType {
+extension EducationCardTypeKeysExt on EmotionCardType {
   String get xRawValue => toString().split('.').last;
 
   String xGetName(BuildContext context) {
     switch (this) {
-      case EducationCardType.acceptance:
+      case EmotionCardType.acceptance:
         return LocaleProvider.of(context).acceptance;
-      case EducationCardType.admiration:
+      case EmotionCardType.admiration:
         return LocaleProvider.of(context).admiration;
-      case EducationCardType.amazement:
+      case EmotionCardType.amazement:
         return LocaleProvider.of(context).amazement;
-      case EducationCardType.anger:
+      case EmotionCardType.anger:
         return LocaleProvider.of(context).anger;
-      case EducationCardType.annoyance:
+      case EmotionCardType.annoyance:
         return LocaleProvider.of(context).annoyance;
-      case EducationCardType.anticipation:
+      case EmotionCardType.anticipation:
         return LocaleProvider.of(context).anticipation;
-      case EducationCardType.apprehension:
+      case EmotionCardType.apprehension:
         return LocaleProvider.of(context).apprehension;
-      case EducationCardType.boredom:
+      case EmotionCardType.boredom:
         return LocaleProvider.of(context).boredom;
-      case EducationCardType.disgust:
+      case EmotionCardType.disgust:
         return LocaleProvider.of(context).disgust;
-      case EducationCardType.distraction:
+      case EmotionCardType.distraction:
         return LocaleProvider.of(context).distraction;
-      case EducationCardType.ecstasy:
+      case EmotionCardType.ecstasy:
         return LocaleProvider.of(context).ecstasy;
-      case EducationCardType.fear:
+      case EmotionCardType.fear:
         return LocaleProvider.of(context).fear;
-      case EducationCardType.grief:
+      case EmotionCardType.grief:
         return LocaleProvider.of(context).grief;
-      case EducationCardType.interest:
+      case EmotionCardType.interest:
         return LocaleProvider.of(context).interest;
-      case EducationCardType.joy:
+      case EmotionCardType.joy:
         return LocaleProvider.of(context).joy;
-      case EducationCardType.loathing:
+      case EmotionCardType.loathing:
         return LocaleProvider.of(context).loathing;
-      case EducationCardType.pensiveness:
+      case EmotionCardType.pensiveness:
         return LocaleProvider.of(context).pensiveness;
-      case EducationCardType.rage:
+      case EmotionCardType.rage:
         return LocaleProvider.of(context).rage;
-      case EducationCardType.sadness:
+      case EmotionCardType.sadness:
         return LocaleProvider.of(context).sadness;
-      case EducationCardType.serenity:
+      case EmotionCardType.serenity:
         return LocaleProvider.of(context).serenity;
-      case EducationCardType.surprise:
+      case EmotionCardType.surprise:
         return LocaleProvider.of(context).surprise;
-      case EducationCardType.terror:
+      case EmotionCardType.terror:
         return LocaleProvider.of(context).terror;
-      case EducationCardType.trust:
+      case EmotionCardType.trust:
         return LocaleProvider.of(context).trust;
-      case EducationCardType.vigilance:
+      case EmotionCardType.vigilance:
         return LocaleProvider.of(context).vigilance;
-      case EducationCardType.aggressiveness:
+      case EmotionCardType.aggressiveness:
         return LocaleProvider.of(context).aggressiveness;
-      case EducationCardType.optimism:
+      case EmotionCardType.optimism:
         return LocaleProvider.of(context).optimism;
-      case EducationCardType.contempt:
+      case EmotionCardType.contempt:
         return LocaleProvider.of(context).contempt;
-      case EducationCardType.awe:
+      case EmotionCardType.awe:
         return LocaleProvider.of(context).awe;
-      case EducationCardType.love:
+      case EmotionCardType.love:
         return LocaleProvider.of(context).love;
-      case EducationCardType.remorse:
+      case EmotionCardType.remorse:
         return LocaleProvider.of(context).remorse;
-      case EducationCardType.disapproval:
+      case EmotionCardType.disapproval:
         return LocaleProvider.of(context).disapproval;
-      case EducationCardType.submission:
+      case EmotionCardType.submission:
         return LocaleProvider.of(context).submission;
+      case EmotionCardType.guilt:
+        return 'guilt';
+      case EmotionCardType.curiosity:
+        return 'curiosity';
+      case EmotionCardType.despair:
+        return 'despair';
+      case EmotionCardType.unbelief:
+        return 'unbelief';
+      case EmotionCardType.envy:
+        return 'envy';
+      case EmotionCardType.cynicism:
+        return 'cynicism';
+      case EmotionCardType.pride:
+        return 'pride';
+      case EmotionCardType.hope:
+        return 'hope';
+      case EmotionCardType.delight:
+        return 'delight';
+      case EmotionCardType.sentimentality:
+        return 'sentimentality';
+      case EmotionCardType.shame:
+        return 'shame';
+      case EmotionCardType.outrage:
+        return 'outrage';
+      case EmotionCardType.pessimism:
+        return 'pessimism';
+      case EmotionCardType.morbidness:
+        return 'morbidness';
+      case EmotionCardType.dominance:
+        return 'dominance';
+      case EmotionCardType.anxiety:
+        return 'anxiety';
+      case EmotionCardType.bittersweetness:
+        return 'bittersweetness';
+      case EmotionCardType.ambivalence:
+        return 'ambivalence';
+      case EmotionCardType.frozenness:
+        return 'frozenness';
+      case EmotionCardType.confusion:
+        return 'confusion';
     }
   }
 }

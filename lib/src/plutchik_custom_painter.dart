@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'src.dart';
 
 class PlutchikCustomPainter extends CustomPainter {
-  final void Function(EducationCardType) onTap;
+  final void Function(EmotionCardType) onTap;
   final BuildContext context;
   final TextStyle textStyle;
   PlutchikCustomPainter({
@@ -14,7 +14,7 @@ class PlutchikCustomPainter extends CustomPainter {
     required this.textStyle,
   });
 
-  final Map<EducationCardType, Path> emotionPaths = {};
+  final Map<EmotionCardType, Path> emotionPaths = {};
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -108,7 +108,7 @@ class PlutchikCustomPainter extends CustomPainter {
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.getInterestOpaqueColor;
+    paint.color = EmotionCardType.getInterestOpaqueColor;
     canvas.drawPath(path, paint);
   }
 
@@ -133,7 +133,7 @@ class PlutchikCustomPainter extends CustomPainter {
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.boredom.color;
+    paint.color = EmotionCardType.boredom.color;
     canvas.drawPath(path, paint);
   }
 
@@ -158,7 +158,7 @@ class PlutchikCustomPainter extends CustomPainter {
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.getAcceptanceOpaqueColor;
+    paint.color = EmotionCardType.getAcceptanceOpaqueColor;
     canvas.drawPath(path, paint);
   }
 
@@ -183,7 +183,7 @@ class PlutchikCustomPainter extends CustomPainter {
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.getApprehensionOpaqueColor;
+    paint.color = EmotionCardType.getApprehensionOpaqueColor;
     canvas.drawPath(path, paint);
   }
 
@@ -208,7 +208,7 @@ class PlutchikCustomPainter extends CustomPainter {
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.getSerenityOpaqueColor;
+    paint.color = EmotionCardType.getSerenityOpaqueColor;
     canvas.drawPath(path, paint);
   }
 
@@ -233,7 +233,7 @@ class PlutchikCustomPainter extends CustomPainter {
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.getPensivenessOpaqueColor;
+    paint.color = EmotionCardType.getPensivenessOpaqueColor;
     canvas.drawPath(path, paint);
   }
 
@@ -258,7 +258,7 @@ class PlutchikCustomPainter extends CustomPainter {
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.getAnnoyanceOpaqueColor;
+    paint.color = EmotionCardType.getAnnoyanceOpaqueColor;
     canvas.drawPath(path, paint);
   }
 
@@ -283,7 +283,7 @@ class PlutchikCustomPainter extends CustomPainter {
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.getDistractionOpaqueColor;
+    paint.color = EmotionCardType.getDistractionOpaqueColor;
     canvas.drawPath(path, paint);
   }
 
@@ -310,16 +310,16 @@ class PlutchikCustomPainter extends CustomPainter {
         rotation: 0,
         largeArc: false,
         clockwise: true);
-    emotionPaths[EducationCardType.serenity] = path;
+    emotionPaths[EmotionCardType.serenity] = path;
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.serenity.color;
+    paint.color = EmotionCardType.serenity.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawSerenityTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.serenity.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.serenity.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.515, size.height * 0.24));
@@ -354,16 +354,27 @@ class PlutchikCustomPainter extends CustomPainter {
         clockwise: false);
     path.cubicTo(size.width * 0.4831242, size.height * 0.3391346, size.width * 0.4818037, size.height * 0.3767266,
         size.width * 0.4903096, size.height * 0.4103616);
-    emotionPaths[EducationCardType.joy] = path;
+    emotionPaths[EmotionCardType.joy] = path;
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.joy.color;
+    Paint paintBorder = _getBorder(paint);
+    //paint.color = Colors.transparent;
     canvas.drawPath(path, paint);
+    canvas.drawPath(path, paintBorder);
+  }
+
+  Paint _getBorder(Paint paint) {
+    Paint paintBorder = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.0
+      ..color = Colors.grey;
+    paint.color = EmotionCardType.joy.color;
+    return paintBorder;
   }
 
   void _drawJoyTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.joy.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.joy.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.545, size.height * 0.34));
@@ -380,16 +391,16 @@ class PlutchikCustomPainter extends CustomPainter {
         rotation: 0,
         largeArc: false,
         clockwise: false);
-    emotionPaths[EducationCardType.ecstasy] = path;
+    emotionPaths[EmotionCardType.ecstasy] = path;
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.ecstasy.color;
+    paint.color = EmotionCardType.ecstasy.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawEcstasyTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.ecstasy.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.ecstasy.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.517, size.height * 0.43));
@@ -418,16 +429,16 @@ class PlutchikCustomPainter extends CustomPainter {
         rotation: 0,
         largeArc: false,
         clockwise: true);
-    emotionPaths[EducationCardType.acceptance] = path;
+    emotionPaths[EmotionCardType.acceptance] = path;
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.acceptance.color;
+    paint.color = EmotionCardType.acceptance.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawAcceptanceTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.acceptance.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.acceptance.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.745, size.height * 0.32));
@@ -466,16 +477,16 @@ class PlutchikCustomPainter extends CustomPainter {
         clockwise: false);
     path.cubicTo(size.width * 0.6848953, size.height * 0.3554025, size.width * 0.6555715, size.height * 0.3810501,
         size.width * 0.6363460, size.height * 0.4107647);
-    emotionPaths[EducationCardType.trust] = path;
+    emotionPaths[EmotionCardType.trust] = path;
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.trust.color;
+    paint.color = EmotionCardType.trust.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawTrustTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.trust.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.trust.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.71, size.height * 0.40));
@@ -492,16 +503,16 @@ class PlutchikCustomPainter extends CustomPainter {
         rotation: 0,
         largeArc: false,
         clockwise: true);
-    emotionPaths[EducationCardType.admiration] = path;
+    emotionPaths[EmotionCardType.admiration] = path;
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.admiration.color;
+    paint.color = EmotionCardType.admiration.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawAdmirationTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.admiration.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.admiration.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.605, size.height * 0.48));
@@ -543,16 +554,16 @@ class PlutchikCustomPainter extends CustomPainter {
         rotation: 0,
         largeArc: false,
         clockwise: false);
-    emotionPaths[EducationCardType.fear] = path;
+    emotionPaths[EmotionCardType.fear] = path;
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.fear.color;
+    paint.color = EmotionCardType.fear.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawFearTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.fear.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.fear.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.78, size.height * 0.56));
@@ -580,16 +591,16 @@ class PlutchikCustomPainter extends CustomPainter {
         clockwise: false);
     path.quadraticBezierTo(
         size.width * 0.9598400, size.height * 0.6044041, size.width * 0.9604614, size.height * 0.5910307);
-    emotionPaths[EducationCardType.apprehension] = path;
+    emotionPaths[EmotionCardType.apprehension] = path;
     path.close();
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.apprehension.color;
+    paint.color = EmotionCardType.apprehension.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawApprehensionTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.apprehension.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.apprehension.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.845, size.height * 0.56));
@@ -607,15 +618,15 @@ class PlutchikCustomPainter extends CustomPainter {
         largeArc: false,
         clockwise: false);
     path.close();
-    emotionPaths[EducationCardType.terror] = path;
+    emotionPaths[EmotionCardType.terror] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.terror.color;
+    paint.color = EmotionCardType.terror.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawTerrorTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.terror.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.terror.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.66, size.height * 0.56));
@@ -645,15 +656,15 @@ class PlutchikCustomPainter extends CustomPainter {
         largeArc: false,
         clockwise: true);
     path.close();
-    emotionPaths[EducationCardType.distraction] = path;
+    emotionPaths[EmotionCardType.distraction] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.distraction.color;
+    paint.color = EmotionCardType.distraction.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawDistractionTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.distraction.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.distraction.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.75, size.height * 0.795));
@@ -697,15 +708,15 @@ class PlutchikCustomPainter extends CustomPainter {
     path.cubicTo(size.width * 0.7959762, size.height * 0.6897373, size.width * 0.7686332, size.height * 0.6620379,
         size.width * 0.7372121, size.height * 0.6438647);
     path.close();
-    emotionPaths[EducationCardType.surprise] = path;
+    emotionPaths[EmotionCardType.surprise] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.surprise.color;
+    paint.color = EmotionCardType.surprise.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawSurpriseTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.surprise.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.surprise.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.68, size.height * 0.725));
@@ -723,15 +734,15 @@ class PlutchikCustomPainter extends CustomPainter {
         largeArc: false,
         clockwise: true);
     path.close();
-    emotionPaths[EducationCardType.amazement] = path;
+    emotionPaths[EmotionCardType.amazement] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.amazement.color;
+    paint.color = EmotionCardType.amazement.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawAmazementTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.amazement.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.amazement.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.61, size.height * 0.64));
@@ -766,15 +777,15 @@ class PlutchikCustomPainter extends CustomPainter {
         clockwise: false);
     path.cubicTo(size.width * 0.6105566, size.height * 0.9377130, size.width * 0.6145959, size.height * 0.9263181,
         size.width * 0.6183633, size.height * 0.9145568);
-    emotionPaths[EducationCardType.pensiveness] = path;
+    emotionPaths[EmotionCardType.pensiveness] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.pensiveness.color;
+    paint.color = EmotionCardType.pensiveness.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawPensivenessTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.pensiveness.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.pensiveness.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.49, size.height * 0.885));
@@ -815,15 +826,15 @@ class PlutchikCustomPainter extends CustomPainter {
     path.cubicTo(size.width * 0.6414728, size.height * 0.8119664, size.width * 0.6428710, size.height * 0.7741179,
         size.width * 0.6342875, size.height * 0.7402997);
     path.close();
-    emotionPaths[EducationCardType.sadness] = path;
+    emotionPaths[EmotionCardType.sadness] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.sadness.color;
+    paint.color = EmotionCardType.sadness.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawSadnessTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.sadness.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.sadness.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.515, size.height * 0.79));
@@ -841,15 +852,15 @@ class PlutchikCustomPainter extends CustomPainter {
         largeArc: false,
         clockwise: false);
     path.close();
-    emotionPaths[EducationCardType.grief] = path;
+    emotionPaths[EmotionCardType.grief] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.grief.color;
+    paint.color = EmotionCardType.grief.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawGriefTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.grief.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.grief.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.535, size.height * 0.68));
@@ -879,15 +890,15 @@ class PlutchikCustomPainter extends CustomPainter {
         largeArc: false,
         clockwise: true);
     path.close();
-    emotionPaths[EducationCardType.boredom] = path;
+    emotionPaths[EmotionCardType.boredom] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.boredom.color;
+    paint.color = EmotionCardType.boredom.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawBoredomTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.boredom.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.boredom.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.268, size.height * 0.795));
@@ -922,15 +933,15 @@ class PlutchikCustomPainter extends CustomPainter {
     path.cubicTo(size.width * 0.4427700, size.height * 0.7962481, size.width * 0.4716666, size.height * 0.7704906,
         size.width * 0.4907756, size.height * 0.7409959);
     path.close();
-    emotionPaths[EducationCardType.disgust] = path;
+    emotionPaths[EmotionCardType.disgust] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.disgust.color;
+    paint.color = EmotionCardType.disgust.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawDisgustTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.disgust.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.disgust.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.3593040, size.height * 0.725));
@@ -948,15 +959,15 @@ class PlutchikCustomPainter extends CustomPainter {
         largeArc: false,
         clockwise: true);
     path.close();
-    emotionPaths[EducationCardType.loathing] = path;
+    emotionPaths[EmotionCardType.loathing] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.loathing.color;
+    paint.color = EmotionCardType.loathing.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawLoathingTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.loathing.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.loathing.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.42, size.height * 0.64));
@@ -997,15 +1008,15 @@ class PlutchikCustomPainter extends CustomPainter {
         rotation: 0,
         largeArc: false,
         clockwise: false);
-    emotionPaths[EducationCardType.anger] = path;
+    emotionPaths[EmotionCardType.anger] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.anger.color;
+    paint.color = EmotionCardType.anger.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawAngerTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.anger.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.anger.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.29, size.height * 0.56));
@@ -1033,15 +1044,15 @@ class PlutchikCustomPainter extends CustomPainter {
         clockwise: false);
     path.quadraticBezierTo(
         size.width * 0.1661553, size.height * 0.5496281, size.width * 0.1656892, size.height * 0.5659327);
-    emotionPaths[EducationCardType.annoyance] = path;
+    emotionPaths[EmotionCardType.annoyance] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.annoyance.color;
+    paint.color = EmotionCardType.annoyance.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawAnnoyanceTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.annoyance.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.annoyance.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.145, size.height * 0.56));
@@ -1059,15 +1070,15 @@ class PlutchikCustomPainter extends CustomPainter {
         largeArc: false,
         clockwise: false);
     path.close();
-    emotionPaths[EducationCardType.rage] = path;
+    emotionPaths[EmotionCardType.rage] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.rage.color;
+    paint.color = EmotionCardType.rage.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawRageTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.rage.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.rage.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.41, size.height * 0.56));
@@ -1097,15 +1108,15 @@ class PlutchikCustomPainter extends CustomPainter {
         largeArc: false,
         clockwise: true);
     path.close();
-    emotionPaths[EducationCardType.interest] = path;
+    emotionPaths[EmotionCardType.interest] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.interest.color;
+    paint.color = EmotionCardType.interest.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawInterestTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.interest.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.interest.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.285, size.height * 0.32));
@@ -1142,15 +1153,15 @@ class PlutchikCustomPainter extends CustomPainter {
     path.cubicTo(size.width * 0.3296695, size.height * 0.4616568, size.width * 0.3570513, size.height * 0.4891730,
         size.width * 0.3883948, size.height * 0.5072729);
     path.close();
-    emotionPaths[EducationCardType.anticipation] = path;
+    emotionPaths[EmotionCardType.anticipation] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.anticipation.color;
+    paint.color = EmotionCardType.anticipation.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawAnticipationTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.anticipation.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.anticipation.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.33, size.height * 0.40));
@@ -1168,15 +1179,15 @@ class PlutchikCustomPainter extends CustomPainter {
         largeArc: false,
         clockwise: true);
     path.close();
-    emotionPaths[EducationCardType.vigilance] = path;
+    emotionPaths[EmotionCardType.vigilance] = path;
 
     Paint paint = Paint()..style = PaintingStyle.fill;
-    paint.color = EducationCardType.vigilance.color;
+    paint.color = EmotionCardType.vigilance.color;
     canvas.drawPath(path, paint);
   }
 
   void _drawVigilanceTitle(Canvas canvas, Size size) {
-    final textSpan = TextSpan(text: EducationCardType.vigilance.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.vigilance.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     textPainter.paint(canvas, Offset(size.width * 0.41, size.height * 0.48));
@@ -1199,10 +1210,10 @@ class PlutchikCustomPainter extends CustomPainter {
     Paint paint = Paint()..style = PaintingStyle.fill;
     paint.color = Colors.transparent;
     canvas.drawPath(path, paint);
-    emotionPaths[EducationCardType.aggressiveness] = path;
+    emotionPaths[EmotionCardType.aggressiveness] = path;
 
     canvas.save();
-    final textSpan = TextSpan(text: EducationCardType.aggressiveness.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.aggressiveness.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     rotate(canvas: canvas, cx: 0, cy: 0, angle: pi / 12);
@@ -1221,10 +1232,10 @@ class PlutchikCustomPainter extends CustomPainter {
     Paint paint = Paint()..style = PaintingStyle.fill;
     paint.color = Colors.transparent;
     canvas.drawPath(path, paint);
-    emotionPaths[EducationCardType.awe] = path;
+    emotionPaths[EmotionCardType.awe] = path;
 
     canvas.save();
-    final textSpan = TextSpan(text: EducationCardType.awe.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.awe.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     rotate(canvas: canvas, cx: 0, cy: 0, angle: pi / 12);
@@ -1243,10 +1254,10 @@ class PlutchikCustomPainter extends CustomPainter {
     Paint paint = Paint()..style = PaintingStyle.fill;
     paint.color = Colors.transparent;
     canvas.drawPath(path, paint);
-    emotionPaths[EducationCardType.contempt] = path;
+    emotionPaths[EmotionCardType.contempt] = path;
 
     canvas.save();
-    final textSpan = TextSpan(text: EducationCardType.contempt.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.contempt.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     rotate(canvas: canvas, cx: 0, cy: 0, angle: -pi / 12);
@@ -1265,10 +1276,10 @@ class PlutchikCustomPainter extends CustomPainter {
     Paint paint = Paint()..style = PaintingStyle.fill;
     paint.color = Colors.transparent;
     canvas.drawPath(path, paint);
-    emotionPaths[EducationCardType.submission] = path;
+    emotionPaths[EmotionCardType.submission] = path;
 
     canvas.save();
-    final textSpan = TextSpan(text: EducationCardType.submission.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.submission.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     rotate(canvas: canvas, cx: 0, cy: 0, angle: -pi / 12);
@@ -1287,10 +1298,10 @@ class PlutchikCustomPainter extends CustomPainter {
     Paint paint = Paint()..style = PaintingStyle.fill;
     paint.color = Colors.transparent;
     canvas.drawPath(path, paint);
-    emotionPaths[EducationCardType.remorse] = path;
+    emotionPaths[EmotionCardType.remorse] = path;
 
     canvas.save();
-    final textSpan = TextSpan(text: EducationCardType.remorse.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.remorse.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     rotate(canvas: canvas, cx: 0, cy: 0, angle: -pi * 0.30);
@@ -1309,10 +1320,10 @@ class PlutchikCustomPainter extends CustomPainter {
     Paint paint = Paint()..style = PaintingStyle.fill;
     paint.color = Colors.transparent;
     canvas.drawPath(path, paint);
-    emotionPaths[EducationCardType.love] = path;
+    emotionPaths[EmotionCardType.love] = path;
 
     canvas.save();
-    final textSpan = TextSpan(text: EducationCardType.love.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.love.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     rotate(canvas: canvas, cx: 0, cy: 0, angle: -pi * 0.30);
@@ -1331,10 +1342,10 @@ class PlutchikCustomPainter extends CustomPainter {
     Paint paint = Paint()..style = PaintingStyle.fill;
     paint.color = Colors.transparent;
     canvas.drawPath(path, paint);
-    emotionPaths[EducationCardType.optimism] = path;
+    emotionPaths[EmotionCardType.optimism] = path;
 
     canvas.save();
-    final textSpan = TextSpan(text: EducationCardType.optimism.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.optimism.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     rotate(canvas: canvas, cx: 0, cy: 0, angle: pi * 0.3);
@@ -1354,10 +1365,10 @@ class PlutchikCustomPainter extends CustomPainter {
     Paint paint = Paint()..style = PaintingStyle.fill;
     paint.color = Colors.transparent;
     canvas.drawPath(path, paint);
-    emotionPaths[EducationCardType.disapproval] = path;
+    emotionPaths[EmotionCardType.disapproval] = path;
 
     canvas.save();
-    final textSpan = TextSpan(text: EducationCardType.disapproval.xGetName(context), style: textStyle);
+    final textSpan = TextSpan(text: EmotionCardType.disapproval.xGetName(context), style: textStyle);
     final textPainter = TextPainter(text: textSpan, textDirection: TextDirection.ltr);
     textPainter.layout(minWidth: 0, maxWidth: size.width);
     rotate(canvas: canvas, cx: 0, cy: 0, angle: pi * 0.3);

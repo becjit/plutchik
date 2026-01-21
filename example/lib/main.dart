@@ -58,9 +58,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  EducationCardType? selectedType;
+  EmotionCardType? selectedType;
 
-  void updateType(EducationCardType? value) {
+  void updateType(EmotionCardType? value) {
     if (selectedType != value && value != null) {
       selectedType = value;
       setState(() {});
